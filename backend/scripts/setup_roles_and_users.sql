@@ -105,7 +105,7 @@ BEGIN
         USR_ultimo_login
     ) VALUES (
         'admin@aeropuerto.com',
-        'bcrypt_hash_aqui', -- Debe ser reemplazado por el hash real
+        '$2a$10$h.zen5xV66/vQSTQwjgyyOEdEePmwYJB3mZGO8fVWdCsCG8iG2Dq2',
         'Administrador',
         'Principal',
         'ADMIN',
@@ -126,7 +126,7 @@ BEGIN
         USR_ultimo_login
     ) VALUES (
         'operador@aeropuerto.com',
-        'bcrypt_hash_aqui',
+        '$2a$10$3X6V/nKUrqsKjGGALRp/0.6YCJEHjy9W7265NaFk87lPt2vM6eAKa',
         'Operador',
         'Vuelos',
         'OPERADOR',
@@ -147,7 +147,7 @@ BEGIN
         USR_ultimo_login
     ) VALUES (
         'seguridad@aeropuerto.com',
-        'bcrypt_hash_aqui',
+        '$2a$10$JDBDajEdLLEmcCGRjaiT9.zX.KVRVe5h.AMbCnMr0rre5SM958lfS',
         'Agente',
         'Seguridad',
         'SEGURIDAD',
@@ -168,7 +168,7 @@ BEGIN
         USR_ultimo_login
     ) VALUES (
         'checkin@aeropuerto.com',
-        'bcrypt_hash_aqui',
+        '$2a$10$qZrURIriV4H9EQ1P5FckFOK4PmULldm9ZgFCBC2q4US16Qa5Z1tYi',
         'Agente',
         'Check-in',
         'CHECK_IN',
@@ -189,7 +189,7 @@ BEGIN
         USR_ultimo_login
     ) VALUES (
         'reportes@aeropuerto.com',
-        'bcrypt_hash_aqui',
+        '$2a$10$CTO8hMA2ZcH9wjpW6x3SEeM6cHyewU.HYx.WhoUUvQLSVR6b6.hAC',
         'Analista',
         'Reportes',
         'REPORTES',

@@ -34,14 +34,23 @@ app.use(securityMiddleware.xssProtection);
 app.use(securityMiddleware.noSniff);
 app.use(securityMiddleware.referrerPolicy);
 
-// Configuración de CORS para desarrollo
+// Configuración de CORS más permisiva para desarrollo
 const corsOptions = {
-  origin: ['http://localhost:3000', 'http://localhost:3001'], // Frontend URLs
+  origin: true, // Permite cualquier origen
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  exposedHeaders: ['Content-Length', 'X-Foo', 'X-Bar'],
+  maxAge: 3600,
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 };
+
+// Aplicar CORS a todas las rutas
 app.use(cors(corsOptions));
+
+// Configuración adicional para manejar preflight requests
+app.options('*', cors(corsOptions));
 
 // Configuración de sesión
 app.use(session({
