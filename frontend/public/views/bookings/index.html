@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Reservas - Sistema Aeropuerto</title>
+    <link rel="stylesheet" href="/assets/css/bookings.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="bookings-container">
+        <div class="bookings-header">
+            <h1>Gestión de Reservas</h1>
+            <div class="header-actions">
+                <button id="newBookingBtn" class="primary-button">
+                    <i class="fas fa-plus"></i>
+                    Nueva Reserva
+                </button>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar reservas...">
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filters-container">
+            <div class="filter-group">
+                <label for="dateRange">Periodo:</label>
+                <select id="dateRange">
+                    <option value="all">Todos</option>
+                    <option value="today">Hoy</option>
+                    <option value="week">Esta Semana</option>
+                    <option value="month">Este Mes</option>
+                    <option value="year">Este Año</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="status">Estado:</label>
+                <select id="status">
+                    <option value="">Todos</option>
+                    <option value="confirmado">Confirmado</option>
+                    <option value="pendiente">Pendiente</option>
+                    <option value="cancelado">Cancelado</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="class">Clase:</label>
+                <select id="class">
+                    <option value="">Todas</option>
+                    <option value="economy">Económica</option>
+                    <option value="business">Business</option>
+                    <option value="first">Primera</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Tabla de reservas -->
+        <div class="bookings-table-container">
+            <table id="bookingsTable">
+                <thead>
+                    <tr>
+                        <th>Número</th>
+                        <th>Pasajero</th>
+                        <th>Vuelo</th>
+                        <th>Clase</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="bookingsTableBody">
+                    <!-- Los datos se cargarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Modal de nueva/editar reserva -->
+        <div id="bookingModal" class="modal">
+            <div class="modal-content">
+                <h2 id="modalTitle">Nueva Reserva</h2>
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label for="passenger">Pasajero:</label>
+                        <select id="passenger" required>
+                            <option value="">Seleccionar pasajero</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="flight">Vuelo:</label>
+                        <select id="flight" required>
+                            <option value="">Seleccionar vuelo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="class">Clase:</label>
+                        <select id="class" required>
+                            <option value="economy">Económica</option>
+                            <option value="business">Business</option>
+                            <option value="first">Primera</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="seat">Asiento:</label>
+                        <input type="text" id="seat" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Precio:</label>
+                        <input type="number" id="price" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Estado:</label>
+                        <select id="status" required>
+                            <option value="pendiente">Pendiente</option>
+                            <option value="confirmado">Confirmado</option>
+                            <option value="cancelado">Cancelado</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Notas:</label>
+                        <textarea id="notes" rows="3"></textarea>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" id="cancelBtn" class="secondary-button">
+                            <i class="fas fa-times"></i>
+                            Cancelar
+                        </button>
+                        <button type="submit" id="saveBtn" class="primary-button">
+                            <i class="fas fa-save"></i>
+                            Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal de detalles -->
+        <div id="detailsModal" class="modal">
+            <div class="modal-content">
+                <h2>Detalles de Reserva</h2>
+                <div id="detailsContent">
+                    <!-- Los detalles se cargarán dinámicamente -->
+                </div>
+                <div class="modal-actions">
+                    <button type="button" id="closeDetailsBtn" class="secondary-button">
+                        <i class="fas fa-times"></i>
+                        Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mensajes -->
+        <div id="successMessage" class="success-message" style="display: none;">
+            <i class="fas fa-check-circle"></i>
+            <span>Reserva guardada exitosamente</span>
+        </div>
+        <div id="errorMessage" class="error-message" style="display: none;">
+            <i class="fas fa-exclamation-circle"></i>
+            <span>Error al guardar la reserva</span>
+        </div>
+
+        <script src="/assets/js/bookings.js"></script>
+    </div>
+</body>
+</html>

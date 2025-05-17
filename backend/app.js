@@ -12,6 +12,10 @@ const monitoring = require('./services/monitoring');
 
 const app = express();
 
+// Configuración de bodyParser (antes de todo)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // Configuración de seguridad
 app.use(helmet({
   contentSecurityPolicy: {
@@ -32,21 +36,37 @@ app.use(securityMiddleware.referrerPolicy);
 
 // Configuración de CORS para desarrollo
 const corsOptions = {
-  origin: 'http://localhost:3001', // Frontend URL
+  origin: ['http://localhost:3000', 'http://localhost:3001'], // Frontend URLs
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 };
 app.use(cors(corsOptions));
 
-// Middleware para logging de CORS
+// Configuración de sesión
+app.use(session({
+  secret: config.session.secret,
+  resave: config.session.resave,
+  saveUninitialized: config.session.saveUninitialized,
+  cookie: config.session.cookie
+}));
+
+// Configuración de rate limiting
+app.use(securityMiddleware.apiLimiter);
+app.use('/auth', securityMiddleware.authLimiter);
+
+// Middleware de logging
 app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
   console.log('Origen de la petición:', req.headers.origin);
   console.log('Método:', req.method);
   console.log('Headers:', req.headers);
   next();
 });
+
+// Rutas de autenticación (antes de las rutas generales)
+const authRoutes = require('./routes/auth');
+app.use('/auth', authRoutes);
 
 // Servir archivos estáticos del frontend
 app.use(express.static(path.join(__dirname, '../frontend/public')));
@@ -62,18 +82,6 @@ app.get('*.js', (req, res, next) => {
   next();
 });
 
-// Configuración de sesión
-app.use(session({
-  secret: config.session.secret,
-  resave: config.session.resave,
-  saveUninitialized: config.session.saveUninitialized,
-  cookie: config.session.cookie
-}));
-
-// Configuración de rate limiting
-app.use(securityMiddleware.apiLimiter);
-app.use('/auth', securityMiddleware.authLimiter);
-
 // Manejar todas las rutas no API sirviendo el frontend
 app.get('*', (req, res, next) => {
   if (!req.path.startsWith('/api') && !req.path.startsWith('/auth')) {
@@ -83,25 +91,11 @@ app.get('*', (req, res, next) => {
   }
 });
 
-// Configuración de bodyParser
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Rutas de autenticación
-const authRoutes = require('./routes/auth');
-app.use('/auth', authRoutes);
-
 // Configuración de monitoreo
 app.use(monitoring.monitoringMiddleware());
 
 // Configuración de reporte de errores
 app.use(errorReporting.transactionHandler());
-
-// Middleware de logging
-app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
-  next();
-});
 
 // Ruta de prueba
 app.get('/', (req, res) => {
@@ -118,8 +112,7 @@ app.get('/status', (req, res) => {
   });
 });
 
-// Rutas
-app.use('/auth', require('./routes/auth'));
+// Rutas generales
 app.use('/users', require('./routes/users'));
 app.use('/flights', require('./routes/flights'));
 app.use('/passengers', require('./routes/passengers'));

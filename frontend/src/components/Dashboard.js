@@ -13,8 +13,8 @@ import {
   Grid,
   CircularProgress
 } from '@mui/material';
-import { setFlights, setPassengers, setReservations, setLoading, setError } from '../../store/store';
-import { api } from '../../api';
+import { setFlights, setPassengers, setReservations, setLoading, setError } from '../store/store';
+import { api } from '../api';
 import FlightForm from './Form/FlightForm';
 import PassengerForm from './Form/PassengerForm';
 import ReservationForm from './Form/ReservationForm';

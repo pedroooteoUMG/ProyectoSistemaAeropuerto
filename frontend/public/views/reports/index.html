@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes - Sistema Aeropuerto</title>
+    <link rel="stylesheet" href="/assets/css/reports.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="reports-container">
+        <div class="reports-header">
+            <h1>Reportes</h1>
+            <div class="header-actions">
+                <button id="generateReportBtn" class="primary-button">
+                    <i class="fas fa-file-pdf"></i>
+                    Generar Reporte
+                </button>
+            </div>
+        </div>
+
+        <!-- Filtros de reportes -->
+        <div class="filters-container">
+            <div class="filter-group">
+                <label for="reportType">Tipo de Reporte:</label>
+                <select id="reportType">
+                    <option value="flights">Vuelos</option>
+                    <option value="passengers">Pasajeros</option>
+                    <option value="bookings">Reservas</option>
+                    <option value="income">Ingresos</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="dateRange">Periodo:</label>
+                <select id="dateRange">
+                    <option value="today">Hoy</option>
+                    <option value="week">Esta Semana</option>
+                    <option value="month">Este Mes</option>
+                    <option value="year">Este Año</option>
+                    <option value="custom">Personalizado</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="format">Formato:</label>
+                <select id="format">
+                    <option value="pdf">PDF</option>
+                    <option value="excel">Excel</option>
+                    <option value="csv">CSV</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Parámetros específicos -->
+        <div class="specific-params" id="flightsParams">
+            <h3>Parámetros de Vuelos</h3>
+            <div class="params-grid">
+                <div class="param-group">
+                    <label for="origin">Origen:</label>
+                    <input type="text" id="origin" placeholder="Ciudad de origen">
+                </div>
+                <div class="param-group">
+                    <label for="destination">Destino:</label>
+                    <input type="text" id="destination" placeholder="Ciudad de destino">
+                </div>
+                <div class="param-group">
+                    <label for="airline">Aerolínea:</label>
+                    <select id="airline">
+                        <option value="">Todas</option>
+                        <option value="Aerolínea 1">Aerolínea 1</option>
+                        <option value="Aerolínea 2">Aerolínea 2</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="specific-params" id="passengersParams" style="display: none;">
+            <h3>Parámetros de Pasajeros</h3>
+            <div class="params-grid">
+                <div class="param-group">
+                    <label for="nationality">Nacionalidad:</label>
+                    <input type="text" id="nationality" placeholder="Nacionalidad">
+                </div>
+                <div class="param-group">
+                    <label for="ageRange">Rango de Edad:</label>
+                    <input type="number" id="minAge" placeholder="Min"> -
+                    <input type="number" id="maxAge" placeholder="Max">
+                </div>
+            </div>
+        </div>
+
+        <div class="specific-params" id="bookingsParams" style="display: none;">
+            <h3>Parámetros de Reservas</h3>
+            <div class="params-grid">
+                <div class="param-group">
+                    <label for="status">Estado:</label>
+                    <select id="status">
+                        <option value="">Todos</option>
+                        <option value="confirmado">Confirmado</option>
+                        <option value="pendiente">Pendiente</option>
+                        <option value="cancelado">Cancelado</option>
+                    </select>
+                </div>
+                <div class="param-group">
+                    <label for="class">Clase:</label>
+                    <select id="class">
+                        <option value="">Todas</option>
+                        <option value="economy">Económica</option>
+                        <option value="business">Business</option>
+                        <option value="first">Primera</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vista previa del reporte -->
+        <div class="report-preview">
+            <h2>Vista Previa</h2>
+            <div id="previewContent">
+                <!-- El contenido se generará dinámicamente -->
+            </div>
+        </div>
+
+        <!-- Mensajes de estado -->
+        <div class="status-messages">
+            <div id="successMessage" class="success-message" style="display: none;">
+                <i class="fas fa-check-circle"></i>
+                <span>Reporte generado exitosamente</span>
+            </div>
+            <div id="errorMessage" class="error-message" style="display: none;">
+                <i class="fas fa-exclamation-circle"></i>
+                <span>Error al generar el reporte</span>
+            </div>
+        </div>
+
+        <!-- Modal de progreso -->
+        <div id="progressModal" class="modal">
+            <div class="modal-content">
+                <h3>Generando Reporte...</h3>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <p id="progressText">0%</p>
+            </div>
+        </div>
+
+        <script src="/assets/js/reports.js"></script>
+    </div>
+</body>
+</html>

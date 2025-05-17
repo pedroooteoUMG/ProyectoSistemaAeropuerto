@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Pasajeros - Sistema Aeropuerto</title>
+    <link rel="stylesheet" href="/assets/css/passengers.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="passengers-container">
+        <div class="passengers-header">
+            <h1>Gestión de Pasajeros</h1>
+            <button id="newPassengerBtn" class="primary-button">
+                <i class="fas fa-plus"></i>
+                Nuevo Pasajero
+            </button>
+        </div>
+
+        <div class="filters-container">
+            <div class="filter-group">
+                <label for="nameSearch">Nombre:</label>
+                <input type="text" id="nameSearch" placeholder="Buscar por nombre">
+            </div>
+            <div class="filter-group">
+                <label for="documentType">Tipo Doc.:</label>
+                <select id="documentType">
+                    <option value="">Todos</option>
+                    <option value="DNI">DNI</option>
+                    <option value="Pasaporte">Pasaporte</option>
+                    <option value="Carnet">Carnet</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="statusFilter">Estado:</label>
+                <select id="statusFilter">
+                    <option value="">Todos</option>
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                    <option value="pendiente">Pendiente</option>
+                </select>
+            </div>
+            <button id="filterBtn" class="secondary-button">
+                <i class="fas fa-filter"></i>
+                Filtrar
+            </button>
+        </div>
+
+        <div class="passengers-list">
+            <div class="passengers-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Tipo Doc.</th>
+                            <th>Número Doc.</th>
+                            <th>Fecha Nac.</th>
+                            <th>Nacionalidad</th>
+                            <th>Estado</th>
+                            <th>Vuelos</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="passengersTableBody">
+                        <!-- Los pasajeros se cargarán dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para crear/editar pasajero -->
+    <div id="passengerModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">Nuevo Pasajero</h2>
+            <form id="passengerForm">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" id="apellido" required>
+                </div>
+                <div class="form-group">
+                    <label for="documentType">Tipo de Documento</label>
+                    <select id="documentType" required>
+                        <option value="DNI">DNI</option>
+                        <option value="Pasaporte">Pasaporte</option>
+                        <option value="Carnet">Carnet</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="documentNumber">Número de Documento</label>
+                    <input type="text" id="documentNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="birthDate">Fecha de Nacimiento</label>
+                    <input type="date" id="birthDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="nationality">Nacionalidad</label>
+                    <input type="text" id="nationality" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Teléfono</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="status">Estado</label>
+                    <select id="status" required>
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                        <option value="pendiente">Pendiente</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="primary-button">Guardar</button>
+                    <button type="button" class="secondary-button" id="cancelBtn">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para ver detalles de pasajero -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <h2>Detalles del Pasajero</h2>
+            <div id="detailsContent"></div>
+            <div class="form-actions">
+                <button type="button" class="secondary-button" id="closeDetailsBtn">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/assets/js/passengers.js"></script>
+</body>
+</html>

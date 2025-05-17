@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sistema Aeropuerto</title>
+    <link rel="stylesheet" href="/assets/css/dashboard.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Dashboard</h1>
+            <div class="header-actions">
+                <div class="date-selector">
+                    <label for="dateRange">Periodo:</label>
+                    <select id="dateRange">
+                        <option value="today">Hoy</option>
+                        <option value="week">Esta Semana</option>
+                        <option value="month">Este Mes</option>
+                        <option value="year">Este Año</option>
+                        <option value="custom">Personalizado</option>
+                    </select>
+                </div>
+                <button id="refreshBtn" class="secondary-button">
+                    <i class="fas fa-sync"></i>
+                    Actualizar
+                </button>
+            </div>
+        </div>
+
+        <div class="dashboard-content">
+            <!-- Tarjetas de estadísticas -->
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Vuelos Programados</h3>
+                        <p id="flightsCount">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Pasajeros Totales</h3>
+                        <p id="passengersCount">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Reservas</h3>
+                        <p id="bookingsCount">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Ingresos</h3>
+                        <p id="incomeAmount">$0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráficos -->
+            <div class="charts-container">
+                <div class="chart-card">
+                    <h3>Reservas por Mes</h3>
+                    <canvas id="bookingsChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>Distribución de Pasajeros</h3>
+                    <canvas id="passengersChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>Estado de Vuelos</h3>
+                    <canvas id="flightsStatusChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Alertas y Notificaciones -->
+            <div class="alerts-container">
+                <h3>Alertas y Notificaciones</h3>
+                <div class="alerts-list" id="alertsList">
+                    <!-- Las alertas se cargarán dinámicamente -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    <script src="/assets/js/dashboard.js"></script>
+</body>
+</html>

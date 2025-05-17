@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import BaseForm from './BaseForm';
-import { api } from '../../../api';
+import { api } from '../../api';
 
 const PassengerForm = ({ passengers }) => {
   const [loading, setLoading] = useState(false);

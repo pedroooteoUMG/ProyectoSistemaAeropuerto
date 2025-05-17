@@ -46,7 +46,8 @@ const securityMiddleware = {
     max: config.security.rateLimit.max,
     message: 'Demasiados intentos de autenticación. Por favor, intenta de nuevo más tarde.',
     standardHeaders: true,
-    legacyHeaders: false
+    legacyHeaders: false,
+    methods: ['GET', 'POST']
   }),
 
   // Protección contra XSS

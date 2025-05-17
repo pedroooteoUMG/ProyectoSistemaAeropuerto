@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Vuelos - Sistema Aeropuerto</title>
+    <link rel="stylesheet" href="/assets/css/flights.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="flights-container">
+        <div class="flights-header">
+            <h1>Gestión de Vuelos</h1>
+            <button id="newFlightBtn" class="primary-button">
+                <i class="fas fa-plus"></i>
+                Nuevo Vuelo
+            </button>
+        </div>
+
+        <div class="filters-container">
+            <div class="filter-group">
+                <label for="origin">Origen:</label>
+                <input type="text" id="origin" placeholder="Ciudad de origen">
+            </div>
+            <div class="filter-group">
+                <label for="destination">Destino:</label>
+                <input type="text" id="destination" placeholder="Ciudad de destino">
+            </div>
+            <div class="filter-group">
+                <label for="date">Fecha:</label>
+                <input type="date" id="date">
+            </div>
+            <button id="filterBtn" class="secondary-button">
+                <i class="fas fa-filter"></i>
+                Filtrar
+            </button>
+        </div>
+
+        <div class="flights-list">
+            <div class="flights-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Número de Vuelo</th>
+                            <th>Origen</th>
+                            <th>Destino</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="flightsTableBody">
+                        <!-- Los vuelos se cargarán dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para crear/editar vuelo -->
+    <div id="flightModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">Nuevo Vuelo</h2>
+            <form id="flightForm">
+                <div class="form-group">
+                    <label for="flightNumber">Número de Vuelo</label>
+                    <input type="text" id="flightNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="originCity">Origen</label>
+                    <input type="text" id="originCity" required>
+                </div>
+                <div class="form-group">
+                    <label for="destinationCity">Destino</label>
+                    <input type="text" id="destinationCity" required>
+                </div>
+                <div class="form-group">
+                    <label for="flightDate">Fecha</label>
+                    <input type="date" id="flightDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="flightTime">Hora</label>
+                    <input type="time" id="flightTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="status">Estado</label>
+                    <select id="status" required>
+                        <option value="programado">Programado</option>
+                        <option value="en_vuelo">En vuelo</option>
+                        <option value="aterrizado">Aterrizado</option>
+                        <option value="cancelado">Cancelado</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="primary-button">Guardar</button>
+                    <button type="button" class="secondary-button" id="cancelBtn">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/assets/js/flights.js"></script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+:root {
+    --primary-color: #1976d2;
+    --primary-dark: #1557b0;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    --background-light: #f8f9fa;
+    --text-primary: #333;
+    --text-secondary: #666;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #f0f7ff, #ffffff);
+    min-height: 100vh;
+}
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Barra de Navegación */
+.main-nav {
+    width: 250px;
+    background: white;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-header h1 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-info span {
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.secondary-button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--background-light);
+    color: var(--text-primary);
+}
+
+.secondary-button:hover {
+    background: #e9ecef;
+}
+
+.nav-menu {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.nav-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-menu li {
+    margin: 0.5rem 0;
+}
+
+.nav-menu a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    text-decoration: none;
+    color: var(--text-secondary);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-menu a:hover {
+    background: var(--background-light);
+    color: var(--primary-color);
+}
+
+.nav-menu a i {
+    width: 20px;
+}
+
+/* Contenido Principal */
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    background: var(--background-light);
+}
+
+.content-header {
+    margin-bottom: 2rem;
+}
+
+.breadcrumb {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.content-area {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+
+#viewFrame {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Estilos para mensajes */
+.success-message, .error-message {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1000;
+}
+
+.success-message {
+    background: #d4edda;
+    color: #155740;
+}
+
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+}

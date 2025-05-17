@@ -47,13 +47,22 @@ class User {
         password: hashedPassword,
         nombre: data.nombre,
         apellido: data.apellido,
-        rol: data.role,
         estado: 'activo',
+        roles: data.roles || [data.role],
         userId: { type: oracledb.STRING, dir: oracledb.BIND_OUT }
       };
 
+      // Insertar usuario
       const result = await executeQuery(sql, binds);
       const userId = result.outBinds.userId[0];
+
+      // Asignar roles
+      for (const role of binds.roles) {
+        await executeProcedure('AER_Asignar_Rol', {
+          p_usuario_id: userId,
+          p_rol_id: role
+        });
+      }
 
       // Enviar correo de bienvenida
       await notifications.sendEmail(

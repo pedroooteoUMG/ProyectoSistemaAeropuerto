@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración de Seguridad - Sistema Aeropuerto</title>
+    <link rel="stylesheet" href="/assets/css/security.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="security-container">
+        <div class="security-header">
+            <h1>Configuración de Seguridad</h1>
+            <div class="header-actions">
+                <button id="newIncidentBtn" class="primary-button">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Nuevo Incidente
+                </button>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar incidentes...">
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filters-container">
+            <div class="filter-group">
+                <label for="date">Fecha:</label>
+                <input type="date" id="date">
+            </div>
+            <div class="filter-group">
+                <label for="status">Estado:</label>
+                <select id="status">
+                    <option value="">Todos</option>
+                    <option value="pendiente">Pendiente</option>
+                    <option value="en_proceso">En Proceso</option>
+                    <option value="resuelto">Resuelto</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="severity">Gravedad:</label>
+                <select id="severity">
+                    <option value="">Todas</option>
+                    <option value="baja">Baja</option>
+                    <option value="media">Media</option>
+                    <option value="alta">Alta</option>
+                    <option value="critica">Crítica</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Tabla de incidentes -->
+        <div class="incidents-table-container">
+            <table id="incidentsTable">
+                <thead>
+                    <tr>
+                        <th>Número</th>
+                        <th>Fecha</th>
+                        <th>Pasajero</th>
+                        <th>Empleado</th>
+                        <th>Ubicación</th>
+                        <th>Gravedad</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="incidentsTableBody">
+                    <!-- Los datos se cargarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Modal de nuevo/editar incidente -->
+        <div id="incidentModal" class="modal">
+            <div class="modal-content">
+                <h2 id="modalTitle">Nuevo Incidente</h2>
+                <form id="incidentForm">
+                    <div class="form-group">
+                        <label for="pasajero">Pasajero:</label>
+                        <select id="pasajero" required>
+                            <option value="">Seleccionar pasajero</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="empleado">Empleado:</label>
+                        <select id="empleado" required>
+                            <option value="">Seleccionar empleado</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripción:</label>
+                        <textarea id="descripcion" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="ubicacion">Ubicación:</label>
+                        <input type="text" id="ubicacion" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="severity">Gravedad:</label>
+                        <select id="severity" required>
+                            <option value="baja">Baja</option>
+                            <option value="media">Media</option>
+                            <option value="alta">Alta</option>
+                            <option value="critica">Crítica</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Estado:</label>
+                        <select id="status" required>
+                            <option value="pendiente">Pendiente</option>
+                            <option value="en_proceso">En Proceso</option>
+                            <option value="resuelto">Resuelto</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Notas:</label>
+                        <textarea id="notes" rows="3"></textarea>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" id="cancelBtn" class="secondary-button">
+                            <i class="fas fa-times"></i>
+                            Cancelar
+                        </button>
+                        <button type="submit" id="saveBtn" class="primary-button">
+                            <i class="fas fa-save"></i>
+                            Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal de detalles -->
+        <div id="detailsModal" class="modal">
+            <div class="modal-content">
+                <h2>Detalles del Incidente</h2>
+                <div id="detailsContent">
+                    <!-- Los detalles se cargarán dinámicamente -->
+                </div>
+                <div class="modal-actions">
+                    <button type="button" id="closeDetailsBtn" class="secondary-button">
+                        <i class="fas fa-times"></i>
+                        Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mensajes -->
+        <div id="successMessage" class="success-message" style="display: none;">
+            <i class="fas fa-check-circle"></i>
+            <span>Incidente guardado exitosamente</span>
+        </div>
+        <div id="errorMessage" class="error-message" style="display: none;">
+            <i class="fas fa-exclamation-circle"></i>
+            <span>Error al guardar el incidente</span>
+        </div>
+
+        <script src="/assets/js/security.js"></script>
+    </div>
+</body>
+</html>
